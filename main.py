@@ -4,7 +4,7 @@ from datetime import datetime
 
 from telegram.ext import Updater
 
-updater = Updater(token='572988765:AAGR8zqdESZ6jEbj8JrPikZp9SCWWS3cnHg')
+updater = Updater(token=bottoken)
 
 dispatcher = updater.dispatcher
 
@@ -144,15 +144,11 @@ def yesterday(bot, update):
             game_sequence_counter = 0
 
     final = ""
-    # counter = 0
+
     for game in games:
-        # dog = str(list(dic.values()))
-        #    final += dog
-        #    counter += 1
-        #    print(counter)
+
         bot.send_message(chat_id=update.message.chat_id, text=game)
 
-    # bot.send_message(chat_id=update.message.chat_id, text=final)
 
 
 yesterday_handler = CommandHandler('yesterday', yesterday)
@@ -160,7 +156,3 @@ dispatcher.add_handler(yesterday_handler)
 
 updater.start_polling()
 
-# import telegram
-
-# bot = telegram.Bot(token='572988765:AAGR8zqdESZ6jEbj8JrPikZp9SCWWS3cnHg')
-# print(bot.get_me())
