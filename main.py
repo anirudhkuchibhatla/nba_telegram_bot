@@ -22,18 +22,6 @@ from telegram.ext import CommandHandler
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
-#def dog(bot, update):
-#    date = datetime.today()
-#    scoreboard = nba_py.Scoreboard(month=date.month - 3, day=date.day, year=date.year)
-#    line_score = scoreboard.line_score()
-#    bot.send_message(chat_id=update.message.chat_id, text=line_score)
-
-
-#from telegram.ext import CommandHandler
-
-#dog_handler = CommandHandler('dog', dog)
-#dispatcher.add_handler(dog_handler)
-
 
 
 def scores(bot, update):
@@ -46,7 +34,7 @@ def scores(bot, update):
     game_sequence_counter = 0
 
     games = []
-    # current_game = {}
+
 
     for team in line_score:
         if team["GAME_SEQUENCE"] != current_game_sequence:
@@ -55,8 +43,6 @@ def scores(bot, update):
 
             if (team["PTS"]):
                 points = str(team["PTS"]) + " - "
-
-            # current_game["TEAM_1_ID"] = team["TEAM_ID"]
 
             current_game_sequence = team["GAME_SEQUENCE"]
             game_sequence_counter += 1
@@ -70,9 +56,6 @@ def scores(bot, update):
             else:
                 points = "Game did not start yet!"
 
-            # current_game["TEAM_2_ID"] = team["TEAM_ID"]
-
-            # current_game["GAME_ID"] = team["GAME_ID"]
 
             current_game = home + " vs. " + away + "\n" + home + " " + record_home + "\n" + away + " " + record_away + "\n" + "Score: " + points
 
@@ -83,15 +66,11 @@ def scores(bot, update):
             game_sequence_counter = 0
 
     final = ""
-    # counter = 0
+
     for game in games:
-        # dog = str(list(dic.values()))
-        #    final += dog
-        #    counter += 1
-        #    print(counter)
+
         bot.send_message(chat_id=update.message.chat_id, text=game)
 
-    # bot.send_message(chat_id=update.message.chat_id, text=final)
 
 
 scores_handler = CommandHandler('scores', scores)
@@ -108,7 +87,7 @@ def yesterday(bot, update):
     game_sequence_counter = 0
 
     games = []
-    # current_game = {}
+
 
     for team in line_score:
         if team["GAME_SEQUENCE"] != current_game_sequence:
@@ -118,7 +97,6 @@ def yesterday(bot, update):
             if (team["PTS"]):
                 points = str(team["PTS"]) + " - "
 
-            # current_game["TEAM_1_ID"] = team["TEAM_ID"]
 
             current_game_sequence = team["GAME_SEQUENCE"]
             game_sequence_counter += 1
@@ -132,15 +110,12 @@ def yesterday(bot, update):
             else:
                 points = "Game did not start yet!"
 
-            # current_game["TEAM_2_ID"] = team["TEAM_ID"]
 
-            # current_game["GAME_ID"] = team["GAME_ID"]
 
             current_game = home + " vs. " + away + "\n" + home + " " + record_home + "\n" + away + " " + record_away + "\n" + "Score: " + points
 
             games.append(current_game)
 
-            # current_game = {}
             game_sequence_counter = 0
 
     final = ""
